@@ -60,9 +60,9 @@ class PositionalEncoding(nn.Module):
                 self.encodings_matrices[p,i] = math.cos(t)
             else:
                 self.encodings_matrices[p,i] = math.sin(t)
-
+        copy = torch.tensor.copy(self.encodings_matrices)
     def forward(self,x):
-      output = torch.cat((x,self.encodings_matrices),1).to(device)
+      output = torch.cat((x,copy),1).to(device)
       return output
 
 class Transformer(nn.Module):
